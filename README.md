@@ -1,3 +1,5 @@
+![thumbnail-small.png](A screenshot of a command prompt with the output of the script: python script.py mastodon.social true false true, downloading domain blocks from mastodon.social...processing...saving to mastodon.social-domain-blocks.csv...done!)
+
 # Mastodon domain block exporter script
 
 Export domain blocks from a Mastodon server into an importable CSV file.
