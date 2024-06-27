@@ -4,10 +4,14 @@ import json
 from csv import DictWriter
 
 parser = argparse.ArgumentParser("script.py")
-parser.add_argument("domain", help="Name of the domain from which to import the domain blocks, eg mastodon.social.", type=str)
-parser.add_argument("reject_media", help="Should media attachments be rejected? true/false", type=str)
-parser.add_argument("reject_reports", help="Should reports from this domain be rejected? true/false", type=str)
-parser.add_argument("obfuscate", help="Should the domain name be partially censored when shown publicly? true/false", type=str)
+parser.add_argument(
+    "domain", help="Name of the domain from which to import the domain blocks, eg mastodon.social.", type=str)
+parser.add_argument(
+    "reject_media", help="Should media attachments be rejected? true/false", type=str)
+parser.add_argument(
+    "reject_reports", help="Should reports from this domain be rejected? true/false", type=str)
+parser.add_argument(
+    "obfuscate", help="Should the domain name be partially censored when shown publicly? true/false", type=str)
 args = parser.parse_args()
 
 if (args.domain):
@@ -30,7 +34,6 @@ if (args.domain):
                     "#obfuscate": args.obfuscate
                 })
 
-
             file_name = f"{args.domain}-domain-blocks.csv"
             print(f"saving to {file_name}...")
 
@@ -43,4 +46,3 @@ if (args.domain):
     except Exception as e:
         print(f"unable to download domain blocks from {args.domain}:")
         print(e)
-
