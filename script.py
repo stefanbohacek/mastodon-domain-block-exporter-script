@@ -13,30 +13,34 @@ args = parser.parse_args()
 if (args.domain):
     print(f"downloading domain blocks from {args.domain}...")
 
-    with urllib.request.urlopen(f"http://{args.domain}/api/v1/instance/domain_blocks") as url:
+    try:
+        with urllib.request.urlopen(f"http://{args.domain}/api/v1/instance/domain_blocks") as url:
+            data = json.load(url)
+            domain_blocks = []
+            # print(json_data)
+            print("processing...")
 
-        data = json.load(url)
-        domain_blocks = []
-        # print(json_data)
-        print("processing...")
-
-        for item in data:
-            domain_blocks.append({
-                "#domain": item["domain"],
-                "#severity": item["severity"],
-                "#reject_media": args.reject_media,
-                "#reject_reports": args.reject_reports,
-                "#public_comment": item["comment"],
-                "#obfuscate": args.obfuscate
-            })
+            for item in data:
+                domain_blocks.append({
+                    "#domain": item["domain"],
+                    "#severity": item["severity"],
+                    "#reject_media": args.reject_media,
+                    "#reject_reports": args.reject_reports,
+                    "#public_comment": item["comment"],
+                    "#obfuscate": args.obfuscate
+                })
 
 
-        file_name = f"{args.domain}-domain-blocks.csv"
-        print(f"saving to {file_name}...")
+            file_name = f"{args.domain}-domain-blocks.csv"
+            print(f"saving to {file_name}...")
 
-        export_file = open(file_name, "w")
-        writer = DictWriter(export_file, domain_blocks[0].keys())
-        writer.writeheader()
-        writer.writerows(domain_blocks)
-        export_file.close()
-        print("done!")
+            export_file = open(file_name, "w")
+            writer = DictWriter(export_file, domain_blocks[0].keys())
+            writer.writeheader()
+            writer.writerows(domain_blocks)
+            export_file.close()
+            print("done!")
+    except Exception as e:
+        print(f"unable to download domain blocks from {args.domain}:")
+        print(e)
+

@@ -21,3 +21,5 @@ An example command to download domain blocks from mastodon.social with `reject_m
 ```sh
 python script.py mastodon.social true false true
 ```
+
+Note that not all Mastodon servers make their domain block lists publicly available. In those cases you will see a `403: Forbidden` error.
