@@ -22,6 +22,8 @@ An example command to download domain blocks from mastodon.social with `reject_m
 python script.py mastodon.social true false true
 ```
 
-Running this command will create a file `mastodon.social-domain-blocks.csv` which you can then import from the `/admin/export_domain_blocks/new` page on your server (eg. `https://mastodon.social/admin/export_domain_blocks/new`). You will be prompted to confirm before the domains are imported, and will also be warned about any existing follow relationships.
+Running this command will create a file `mastodon.social-domain-blocks.csv` which you can then import from the `/admin/export_domain_blocks/new` page on your server (eg. `https://mastodon.social/admin/export_domain_blocks/new`).
+
+You will be prompted to confirm each individual domain before it's imported, and you will also be warned about any existing follow relationships that would be severed.
 
 Note that not all Mastodon servers make their domain block lists publicly available. In those cases you will see a `403: Forbidden` error.
